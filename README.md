@@ -2,7 +2,19 @@
 
 A comprehensive MLM (Multi-Level Marketing) website built with HTML, CSS, JavaScript, and Firebase. This platform includes user registration, package management, referral system, and an admin panel.
 
+[![License](https://img.shields.io/github/license/Bannysukumar/mlm-web)](https://github.com/Bannysukumar/mlm-web/blob/main/LICENSE) [![Stars](https://img.shields.io/github/stars/Bannysukumar/mlm-web)](https://github.com/Bannysukumar/mlm-web/stargazers) [![Last commit](https://img.shields.io/github/last-commit/Bannysukumar/mlm-web)](https://github.com/Bannysukumar/mlm-web/commits/main)
+
+## Overview
+
+A comprehensive MLM (Multi-Level Marketing) website built with HTML, CSS, JavaScript, and Firebase. This platform includes user registration, package management, referral system, and an admin panel.
+
+
+What is actually in the repository: `css/`, `js/`. GitHub reports the primary language as HTML.
+
+Published site recorded on the repository: https://mlm-web-two.vercel.app
+
 ## Features
+
 
 - ✅ User Registration & Authentication (Firebase)
 - ✅ Referral System (12% Level Bonus)
@@ -11,142 +23,63 @@ A comprehensive MLM (Multi-Level Marketing) website built with HTML, CSS, JavaSc
 - ✅ Withdrawal System with Conditions
 - ✅ Package Purchase System
 
-## Package Structure
+## Tech Stack
 
-### Investment Packages
-- $10 - Starter
-- $20 - Basic
-- $50 - Standard
-- $100 - Premium
-- $250 - Gold
-- $500 - Platinum
-- $1,000 - Diamond
-- $2,000 - Elite
-- $5,000 - Master
-- $10,000 - Grand Master
+| Technology | Where it shows up |
+|---|---|
+| Firebase | Backend services used by this repository |
+| ethers.js or web3.js | Wallet and contract calls from the browser or app |
 
-### Bonus Structure
-1. Daily Bonus: 1% Daily on each trade
-2. MB Bonus: 3X Daily 1% for 7 DAYS
-3. DRB Bonus: 1% daily for 100 days
-4. Level Bonus:
-   - Level 1: 5%
-   - Level 2: 3%
-   - Level 3: 2%
-   - Level 4: 1%
-   - Level 5: 1%
+## Project Structure
 
-### Salary Bonus (MB)
-| Amount | Salary | Duration |
-|--------|---------|-----------|
-| $10,000 | $100 | 12 months |
-| $30,000 | $200 | 12 months |
-| $50,000 | $400 | 12 months |
-| $100,000 | $700 | 12 months |
-| $500,000 | $1,500 | 12 months |
-
-## Withdrawal & Registration Details
-
-- Registration is Free
-- Withdrawal - 10% Service Fee
-- Minimum Withdrawal - $11
-- Maximum Withdrawal - Unlimited
-- Weekly Withdrawal - Every Monday
-
-## Setup Instructions
-
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd mlm-website
+```text
+mlm-web/
+├── css/
+├── js/
+├── about.html
+├── admin-dashboard.html
+├── admin-login.html
+├── admin-packages.html
+├── admin-settings.html
+├── admin-transactions.html
+├── admin-users.html
+├── admin-withdrawals.html
+├── contact.html
+├── dashboard.html
+├── faq.html
+├── forgot-password.html
 ```
 
-2. Install dependencies:
+## Getting Started
+
 ```bash
+git clone https://github.com/Bannysukumar/mlm-web.git
+cd mlm-web
 npm install
-```
-
-3. Create a Firebase project:
-   - Go to [Firebase Console](https://console.firebase.google.com/)
-   - Create a new project
-   - Enable Authentication (Email/Password)
-   - Create a Firestore database
-   - Get your Firebase configuration
-
-4. Update Firebase configuration:
-   - Open `js/config.js`
-   - Replace the placeholder values with your Firebase configuration
-
-5. Start the development server:
-```bash
 npm start
 ```
 
-## Firebase Setup
+Scripts defined in package.json:
 
-1. Authentication:
-   - Enable Email/Password authentication
-   - Set up security rules
+- `npm run start` — `live-server`
+- `npm run test` — `echo "Error: no test specified" && exit 1`
 
-2. Firestore Database:
-   - Create the following collections:
-     - users
-     - transactions
-     - withdrawals
-   - Set up appropriate security rules
+## Deployment
 
-3. Admin Setup:
-   - Create an admin user in Firebase Authentication
-   - Update the user's role to 'admin' in Firestore
-
-## Security Rules
-
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    // User profiles
-    match /users/{userId} {
-      allow read: if request.auth != null;
-      allow write: if request.auth != null && request.auth.uid == userId;
-      allow write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
-    }
-    
-    // Transactions
-    match /transactions/{transactionId} {
-      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
-      allow create: if request.auth != null;
-      allow update, delete: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
-    }
-    
-    // Withdrawals
-    match /withdrawals/{withdrawalId} {
-      allow read: if request.auth != null && (resource.data.userId == request.auth.uid || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
-      allow create: if request.auth != null;
-      allow update: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
-    }
-  }
-}
-```
+- The repository homepage is https://mlm-web-two.vercel.app.
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Licensed under MIT. See [LICENSE](LICENSE).
 
-<!-- readme-seo: bannysukumar -->
+## Author
 
-## Open source
+[Banny Sukumar](https://github.com/Bannysukumar)
 
-This repository is open source and maintained by [Banny Sukumar](https://github.com/Bannysukumar). MLM Web is published so other developers can study the code and contribute.
-
-## License
-
-Released under the [MIT License](LICENSE). Copyright (c) 2026 Banny Sukumar. See [CONTRIBUTING.md](CONTRIBUTING.md) if you want to help.
+- GitHub: [@Bannysukumar](https://github.com/Bannysukumar)
+- Portfolio: [adepu-sukumar.vercel.app](https://adepu-sukumar.vercel.app/)
+- LinkedIn: [Adepu Sukumar](https://www.linkedin.com/in/adepu-sukumar-59b423351)
